@@ -29,18 +29,24 @@ const promptUser = () => {
             }
         },
         {
+            type: 'confirm',
+            name: 'confirmAbout',
+            message: 'Would you like to enter some information about yourself for an "About" section?',
+            default: true
+        },
+        {
             type: 'input',
             name: 'about',
-            message: 'Provide some information about yourself:'
-            validate: aboutInput => {
-                if (aboutInput) {
+            message: 'Provide some information about yourself:',
+            when: ({ confirmAbout }) => {
+                if (confirmAbout) {
                     return true;
                 } else {
-                    console.log('Do not leave blank!');
                     return false;
                 }
             }
         }
+        
 
 
     ]);
@@ -48,10 +54,9 @@ const promptUser = () => {
 
 const promptProject = portfolioData => {
     console.log(`
-  =================
-  Add a New Project
-  =================
-  `);
+=================
+Add a New Project
+=================`);
 
     // If there's no 'projects' array property, create one
     if (!portfolioData.projects) {
